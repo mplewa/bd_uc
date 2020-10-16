@@ -1,0 +1,45 @@
+create DATABASE `arkusz`;
+
+create table `lektury`
+(
+	`id` int,
+	`tytu³` varchar(30),
+	`cena` float,
+	`pesel` char(11)
+);
+
+alter table `lektury`
+add column `liczba stron` int;
+
+alter table `lektury`
+add primary key (`id`);
+
+alter table `lektury`
+modify `id` int AUTO_INCREMENT;
+
+alter table `lektury`
+drop column `liczba stron`;
+
+alter table `lektury`
+alter `cena` set DEFAULT 100.50;
+
+alter table `lektury`
+change `tytu³` `miejsce wydania` varchar(30);
+
+rename table `lektury` to `ksiazki`;
+
+insert into `ksiazki` (`miejsce wydania`,`pesel`)
+values ('Poznan','00000000000'),
+('Warszawa','00000000001'),
+('Krakow','00000000011'),
+('Katowice','00000000111'),
+('Rzeszow','00000000111');
+
+update `ksiazki` set  `cena`= `cena`*1.1
+where `id`=3;
+
+update `ksiazki` set  `cena`= 1000, `miejsce wydania`='Nowy York'
+where `id`=5;
+
+delete from `ksiazki`
+where `miejsce wydania` not like '%a%';
